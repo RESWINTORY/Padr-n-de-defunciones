@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="760.0" prefWidth="1200.0" style="-fx-background-color: #f3f6fa;"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="pe.edu.upeu.sysventas.controller.DefuncionController">
+    <top>
+        <VBox spacing="5.0" style="-fx-background-color: #1f4e79;">
+            <padding>
+                <Insets bottom="18.0" left="18.0" right="18.0" top="18.0"/>
+            </padding>
+            <Label text="REGISTRO CIVIL" textFill="WHITE">
+                <font>
+                    <Font name="System Bold" size="13.0"/>
+                </font>
+            </Label>
+            <Label text="Padrón de defunciones" textFill="WHITE">
+                <font>
+                    <Font name="System Bold" size="25.0"/>
+                </font>
+            </Label>
+            <Label text="Sistema de registro y consulta de defunciones" textFill="#dceaf7"/>
+        </VBox>
+    </top>
+    <center>
+        <VBox spacing="14.0">
+            <padding>
+                <Insets bottom="18.0" left="18.0" right="18.0" top="18.0"/>
+            </padding>
+            <TitledPane collapsible="false" expanded="true" text="Datos de la defunción y familiar responsable">
+                <GridPane hgap="12.0" style="-fx-background-color: white;" vgap="10.0">
+                    <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+                    </padding>
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="150.0"/>
+                        <ColumnConstraints hgrow="ALWAYS"/>
+                        <ColumnConstraints minWidth="150.0"/>
+                        <ColumnConstraints hgrow="ALWAYS"/>
+                    </columnConstraints>
+
+                    <Label text="Nombre del fallecido:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                    <TextField fx:id="txtNombre" promptText="Nombres y apellidos"
+                               GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                    <Label text="Fecha de defunción:" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                    <DatePicker fx:id="dpFecha" maxWidth="Infinity" promptText="Seleccionar fecha"
+                                GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+
+                    <Label text="Lugar de defunción:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                    <TextField fx:id="txtLugar" promptText="Ciudad, hospital o dirección"
+                               GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                    <Label text="Causa de muerte:" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                    <TextField fx:id="txtCausa" promptText="Causa registrada"
+                               GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+
+                    <Label text="Familiar responsable:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                    <TextField fx:id="txtFamiliar" promptText="Nombre completo"
+                               GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    <Label text="Parentesco:" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                    <TextField fx:id="txtParentesco" promptText="Ej. hijo, cónyuge, hermano"
+                               GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+                </GridPane>
+            </TitledPane>
+
+            <HBox spacing="9.0">
+                <Button onAction="#guardar" text="Guardar"
+                        style="-fx-background-color: #247a4b; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                <Button onAction="#actualizar" text="Actualizar"
+                        style="-fx-background-color: #2463a6; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                <Button onAction="#eliminar" text="Eliminar"
+                        style="-fx-background-color: #b83232; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                <Button onAction="#limpiar" text="Limpiar"/>
+                <Button onAction="#listar" text="Mostrar todos"/>
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="8.0">
+                <TextField fx:id="txtBuscar" promptText="Buscar por nombre, lugar o ID" HBox.hgrow="ALWAYS"/>
+                <Button onAction="#buscar" text="Buscar"/>
+                <Label text="Consejo: selecciona una fila para cargar sus datos en el formulario."
+                       textFill="#526579"/>
+            </HBox>
+
+            <TableView fx:id="tabla" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colId" prefWidth="55.0" text="ID"/>
+                    <TableColumn fx:id="colNombre" prefWidth="190.0" text="Nombre del fallecido"/>
+                    <TableColumn fx:id="colFecha" prefWidth="110.0" text="Fecha"/>
+                    <TableColumn fx:id="colLugar" prefWidth="180.0" text="Lugar de defunción"/>
+                    <TableColumn fx:id="colCausa" prefWidth="170.0" text="Causa de muerte"/>
+                    <TableColumn fx:id="colFamiliar" prefWidth="190.0" text="Familiar responsable"/>
+                    <TableColumn fx:id="colParentesco" prefWidth="120.0" text="Parentesco"/>
+                </columns>
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
+            </TableView>
+
+            <Label fx:id="lblEstado" text="Formulario listo." textFill="#1f4e79"/>
+        </VBox>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" style="-fx-background-color: #e1eaf3;">
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+            </padding>
+            <Label text="Ejercicio 9 • Padrón de defunciones • JavaFX" textFill="#526579"/>
+        </HBox>
+    </bottom>
+</BorderPane>
